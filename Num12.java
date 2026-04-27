@@ -3,28 +3,29 @@ import java.lang.reflect.*;
 public class Num12 {
     public static void main(String[] args) {
         try {
-            // 1. Get the class blueprint
-            Class<?> clazz = Class.forName("Potion");
+            // 1. Get the Class for "Robot"
+            Class<?> clazz = Class.forName("Robot");
 
-            // 2. Create the object
-            Object myPotion = clazz.getDeclaredConstructor().newInstance();
+            // 2. Create the instance (get constructor then new instance)
+            Object myBot = clazz.getDeclaredConstructor().newInstance();
 
-            // 3. Define the parameter "Shape" (String and int)
-            // Slide 13: This tells Java which version of the method to find
-            Class<?>[] types = new Class[] { String.class, int.class };
+            // 3. Get the PRIVATE field "batteryLevel"
+            Field f = clazz.getDeclaredField("batteryLevel");
+            
+            // 4. Use the "Skeleton Key" on the field
+            f.setAccessible(true);
+            
+            // 5. Set the batteryLevel to 100 on myBot
+            f.set(myBot, 100);
 
-            // 4. Get the "mix" method
-            Method m = clazz.getDeclaredMethod("mix", types);
+            // 6. Get the method "charge" (no parameters)
+            Method m = clazz.getDeclaredMethod("charge");
 
-            // 5. Invoke the method with data: "Dragon Root" and 5
-            // Store the result in an Object since we don't know the exact type
-            Object result = m.invoke(myPotion, "Dragon Root", 5);
-
-            // 6. Print the result
-            System.out.println("Result: " + result);
+            // 7. Run the method on myBot
+            m.invoke(myBot);
 
         } catch (Exception e) {
-            System.out.println("Error occurred!");
+            System.out.println("Error!");
         }
     }
 }
