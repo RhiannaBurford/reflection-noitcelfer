@@ -1,3 +1,5 @@
+import java.lang.reflect.Method;
+
 public class Num1 {
 
     // First of all, you need to get the class using Class.forName
@@ -15,6 +17,10 @@ public class Num1 {
 
         try{
             Class<?> class1 = Class.forName(target);
+            Method[] methods = class1.getDeclaredMethods();
+            for (Method m : methods){
+                System.out.println(m.toString());
+            }
 
         }
         catch (ClassNotFoundException e){
