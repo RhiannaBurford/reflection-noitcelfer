@@ -11,6 +11,16 @@ public class Num1 {
             System.out.println("Class does not exist.");
         }
 
+        String target = "java.lang.String";
+
+        try{
+            Class<?> class1 = Class.forName(target);
+
+        }
+        catch (ClassNotFoundException e){
+            System.out.println("Class not found");
+        }
+
     }
     
 }
