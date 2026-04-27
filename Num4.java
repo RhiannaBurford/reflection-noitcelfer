@@ -6,9 +6,18 @@ public class Num4 {
         try{
             Class<?> class1 = Class.forName("Warrior");
             Field[] fields = class1.getDeclaredFields();
+            Warrior myWarrior = new Warrior("Conan", 100);
 
             for (Field f : fields){
-                System.out.println(f.getName());
+                try{
+                    f.setAccessible(true);
+                    Object val = f.get(myWarrior);
+                    System.out.println(f.getName() + ": " + val);
+
+                }
+                catch (IllegalAccessException e){
+                    System.out.println("Could not access field " + f.getName());
+                }
             }
         }
         catch (ClassNotFoundException e){
